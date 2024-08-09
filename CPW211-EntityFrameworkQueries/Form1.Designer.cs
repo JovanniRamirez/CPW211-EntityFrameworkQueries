@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             btnSelectAllVendors = new Button();
-            button2 = new Button();
+            btnAllCaliforniaVendors = new Button();
             button3 = new Button();
             SuspendLayout();
             // 
@@ -37,20 +37,21 @@
             // 
             btnSelectAllVendors.Location = new Point(50, 39);
             btnSelectAllVendors.Name = "btnSelectAllVendors";
-            btnSelectAllVendors.Size = new Size(180, 23);
+            btnSelectAllVendors.Size = new Size(180, 42);
             btnSelectAllVendors.TabIndex = 0;
             btnSelectAllVendors.Text = "Select * FROM Vendors";
             btnSelectAllVendors.UseVisualStyleBackColor = true;
             btnSelectAllVendors.Click += btnSelectAllVendors_Click;
             // 
-            // button2
+            // btnAllCaliforniaVendors
             // 
-            button2.Location = new Point(50, 116);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnAllCaliforniaVendors.Location = new Point(50, 116);
+            btnAllCaliforniaVendors.Name = "btnAllCaliforniaVendors";
+            btnAllCaliforniaVendors.Size = new Size(464, 39);
+            btnAllCaliforniaVendors.TabIndex = 1;
+            btnAllCaliforniaVendors.Text = "Select * From Vendors Where VendorState = 'CA' OrderBy VendorName ASC";
+            btnAllCaliforniaVendors.UseVisualStyleBackColor = true;
+            btnAllCaliforniaVendors.Click += btnAllCaliforniaVendors_Click;
             // 
             // button3
             // 
@@ -67,7 +68,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnAllCaliforniaVendors);
             Controls.Add(btnSelectAllVendors);
             Name = "Form1";
             Text = "Form1";
@@ -77,7 +78,7 @@
         #endregion
 
         private Button btnSelectAllVendors;
-        private Button button2;
+        private Button btnAllCaliforniaVendors;
         private Button button3;
     }
 }
