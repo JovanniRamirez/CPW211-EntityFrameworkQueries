@@ -42,19 +42,42 @@ namespace CPW211_EntityFrameworkQueries
             ApContext dbContext = new();
             // Anonymous type
             List<VendorLocation> results = (from v in dbContext.Vendors
-                          select new VendorLocation
-                          {
-                                VendorName = v.VendorName, 
-                                VendorState = v.VendorState,
-                                VendorCity = v.VendorCity
-                          }).ToList();
+                                            select new VendorLocation
+                                            {
+                                                VendorName = v.VendorName,
+                                                VendorState = v.VendorState,
+                                                VendorCity = v.VendorCity
+                                            }).ToList();
             StringBuilder displayString = new();
             foreach (VendorLocation vendor in results)
             {
                 displayString.AppendLine($"{vendor.VendorName} is in {vendor.VendorCity}");
             }
 
-            MessageBox.Show(displayString.ToString() );
+            MessageBox.Show(displayString.ToString());
+        }
+
+        private void btnMiscQueries_Click(object sender, EventArgs e)
+        {
+            ApContext dbContext = new();
+
+            // Check if a Vendor exist in WA
+            bool doesExist = (from v in dbContext.Vendors
+                              where v.VendorState == "WA"
+                              select v).Any();
+
+            // Get number of Invoices
+            int invoiceCount = (from invoices in dbContext.Invoices
+                                select invoices).Count();
+
+            //Query a single vendor
+            Vendor? singleVendor = (from v in dbContext.Vendors
+                         where v.VendorName == "IBM"
+                         select v).SingleOrDefault();
+            if ( singleVendor != null)
+            {
+                //Do something with the Vendor object
+            }
         }
     }
 
