@@ -72,12 +72,41 @@ namespace CPW211_EntityFrameworkQueries
 
             //Query a single vendor
             Vendor? singleVendor = (from v in dbContext.Vendors
-                         where v.VendorName == "IBM"
-                         select v).SingleOrDefault();
-            if ( singleVendor != null)
+                                    where v.VendorName == "IBM"
+                                    select v).SingleOrDefault();
+            if (singleVendor != null)
             {
                 //Do something with the Vendor object
             }
+        }
+
+        private void btnVendorsAndInvoices_Click(object sender, EventArgs e)
+        {
+            ApContext dbContext = new();
+
+            //Vendors left join invoices
+            List<Vendor> allVendors = dbContext.Vendors.Include(v => v.Invoices).ToList();
+
+            //unfinished code this pulls vendor object for each individual invoice
+            //Vendors are pulled back if they have no invoices
+/*            List<Vendor> allVendors = (from v in dbContext.Vendors
+                                      join inv in dbContext.Invoices
+                                        on v.VendorId equals inv.VendorId into grouping
+                                      from inv in grouping.DefaultIfEmpty()
+                                      select v).ToList();*/
+
+            StringBuilder results = new();
+
+            foreach (Vendor v in allVendors)
+            {
+                results.Append(v.VendorName);
+                foreach (Invoice inv in v.Invoices)
+                {
+                    results.Append(", " + inv.InvoiceNumber);
+                }
+                results.AppendLine();
+            }
+            MessageBox.Show(results.ToString());
         }
     }
 
