@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CPW211_EntityFrameworkQueries.Models;
-
+ 
+[DebuggerDisplay("Name: {VendorName, nq} - State: {VendorState, nq}")] //nq removes quotes from name display in debugger
 public partial class Vendor
 {
     public int VendorId { get; set; }
